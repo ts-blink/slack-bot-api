@@ -356,6 +356,22 @@ Bot.prototype.postTo = function(name, text, params, cb) {
 };
 
 /**
+ * Uploads a file to channels by ID
+ * @param {Array} ids - channel IDs
+ * @param {string} filename
+ * @param {object} params
+ * @returns {vow.Promise}
+ */
+Bot.prototype.uploadFile = function(ids, filename, params) {
+    params = extend({
+        filename: filename,
+        channels: ids.join(',')
+    }, params || {});
+
+    return this._api('files.upload', params);
+};
+
+/**
  * Preprocessing of params
  * @param params
  * @returns {object}
